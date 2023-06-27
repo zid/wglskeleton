@@ -18,7 +18,7 @@ void game_init(void)
 
 	s = scene_new();
 
-	model_init_from_square(&m);
+	model_init_from_bin(&m, "data/board.bin");
 	model_set_shader(m, "meow.vshade", "meow.fshade");
 	scene_attach(s, m);
 }

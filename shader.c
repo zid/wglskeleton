@@ -19,7 +19,12 @@ static const char *load_txt(const char *name)
 	rewind(f);
 
 	s = malloc(len+1);
-	fread(s, 1, len, f);
+	if(fread(s, 1, len, f) != len)
+	{
+		free(f);
+		fclose(f);
+		return NULL;
+	}
 
 	s[len] = 0;
 

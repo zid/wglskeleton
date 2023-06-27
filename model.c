@@ -39,3 +39,11 @@ void model_init_from_square(struct model **m)
 	(*m)->g = gfx_load_square();
 }
 
+void model_init_from_bin(struct model **m, const char *path)
+{
+	*m = model_new();
+	if(!*m)
+		return;
+
+	(*m)->g = gfx_load_bin(path);
+}

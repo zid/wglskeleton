@@ -11,6 +11,7 @@ void gfx_draw(struct gfx *);
 void gfx_clear(void);
 
 struct gfx *gfx_load_square(void);
+struct gfx *gfx_load_bin(const char *);
 void gfx_load_shader(struct gfx *, const char *, const char *);
 
 #endif

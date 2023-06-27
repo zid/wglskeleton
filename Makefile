@@ -14,8 +14,13 @@ else
 	LDFLAGS += -lGL -lX11
 endif
 
-game.exe: $(OBJ)
+game.exe: $(OBJ) data
 	$(CC) $(OBJ) -o game.exe $(LDFLAGS)
+
+.PHONY: data
+
+data:
+	$(MAKE) -C data
 
 %.o : %.c
 	$(CC) -c $^ $(CFLAGS)

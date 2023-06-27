@@ -36,6 +36,21 @@ struct gfx *gfx_load_square(void)
 	return g;
 }
 
+struct gfx *gfx_load_bin(const char *path)
+{
+	struct gfx *g;
+
+	g = malloc(sizeof *g);
+	if(!g)
+		return NULL;
+
+	gfx_geom_load_bin(g, path);
+
+	gfx_init_vao(g);
+
+	return g;
+}
+
 void gfx_load_shader(struct gfx *g, const char *vsrc, const char *fsrc)
 {
 	g->shader = shader_load(vsrc, fsrc);
@@ -52,7 +67,7 @@ void gfx_init(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
-	glEnable(GL_DEPTH);
+	glEnable(GL_DEPTH_TEST);
 }
 
 void gfx_clear(void)
@@ -64,5 +79,6 @@ void gfx_draw(struct gfx *g)
 {
 	glUseProgram(g->shader.program);
 	glBindVertexArray(g->v.vao);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
+	glDrawElements(GL_TRIANGLES, g->indices_sizeb / 2, GL_UNSIGNED_SHORT, 0);
 }
+
